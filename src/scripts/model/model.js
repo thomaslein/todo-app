@@ -1,3 +1,9 @@
+/*
+* This file is part of the Todo App 2017 project.
+*
+* @author Thomas Lein <thomaslein@gmail.com>
+*/
+
 import EventEmitter from 'events';
 import api from '../utils/api';
 
@@ -20,6 +26,11 @@ export default class Model extends EventEmitter {
     return this.todos;
   }
 
+/**
+ * Creates a request to get all tasks and returns a promise.
+ *
+ * @return {Promise}
+ */
   fetch = () => {
     return new Promise((resolve, reject) => {
       api('/todos', 'get')
@@ -32,15 +43,18 @@ export default class Model extends EventEmitter {
           }
         })
 
-        if(result) {
-          resolve(result);
-        } else {
-          reject('something went wrong');
-        }
+        resolve(result);
       });
     });
   }
 
+/**
+ * Creates a request to save a task and returns a promise.
+ *
+ * @param {String} value
+ *
+ * @return {Promise}
+ */
   saveTodo = (value) => {
     if (value !== '') {
       return new Promise((resolve, reject) => {
@@ -49,16 +63,19 @@ export default class Model extends EventEmitter {
           this.todos.push(result);
           this.emit(ADD_TODO, result);
 
-          if(result) {
-            resolve(result);
-          } else {
-            reject('something went wrong');
-          }
+          resolve(result);
         });
       });
     }
   }
 
+/**
+ * Creates a request to delete a task and returns a promise.
+ *
+ * @param {String} id
+ *
+ * @return {Promise}
+ */
   deleteTodo = (id) => {
     if (id !== '') {
       return new Promise((resolve, reject) => {
@@ -71,16 +88,20 @@ export default class Model extends EventEmitter {
             }
           });
 
-          if(result) {
-            resolve(result);
-          } else {
-            reject('something went wrong');
-          }
+          resolve(result);
         });
       });
     }
   }
 
+/**
+ * Creates request to mark a task as
+ * complete and returns a promise.
+ *
+ * @param {String} id
+ *
+ * @return {Promise}
+ */
   updateTodo = (id) => {
     if (id !== '') {
       return new Promise((resolve, reject) => {
@@ -93,11 +114,7 @@ export default class Model extends EventEmitter {
               }
             });
           }
-          if(result) {
-            resolve(result);
-          } else {
-            reject('something went wrong');
-          }
+          resolve(result);
         });
       });
     }

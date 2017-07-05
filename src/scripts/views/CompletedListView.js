@@ -1,12 +1,30 @@
+/**
+  * Constructs the completed list view with all completed tasks
+  *
+  * @param {Element} element
+  *
+  */
 export default class CompletedListView {
   constructor(element) {
     this.element = element;
   }
 
+  /**
+   * Appends a completed task to dom on initialize
+   *
+   * @param {Element} element
+   *
+   */
   append = (element) => {
     this.element.appendChild(element);
   }
 
+  /**
+   * Constructs a completed task to dom
+   *
+   * @param {Object} todo
+   *
+   */
   addCompletedTodoToDom = (todo) => {
     const item = document.createElement('li');
 

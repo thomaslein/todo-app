@@ -6,7 +6,7 @@ const model = new Model();
 
 describe('Model', () => {
 
-  it('fetches all tasks', () => {
+  it('it fetches all tasks', () => {
 
     fetch.mockResponse(JSON.stringify([
       {
@@ -84,7 +84,7 @@ describe('Model', () => {
     })
 
 
-    it('it updaates task', () => {
+    it('it updates task to complete', () => {
 
       fetch.mockResponse(JSON.stringify({
         '_id': '5958c02f9e3f27bd5c93e7fc',

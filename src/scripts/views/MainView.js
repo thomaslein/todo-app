@@ -2,6 +2,13 @@ import SubmitView from './SubmitView';
 import CompletedListView from './CompletedListView';
 import ListView from './ListView';
 
+/**
+* Constructs the main view with sub views
+*
+* @param {Controller} controller
+* @param {Model} model
+*
+*/
 export default class MainView {
   constructor(controller, model) {
     this.controller = controller;

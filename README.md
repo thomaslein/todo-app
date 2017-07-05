@@ -53,7 +53,6 @@ http://localhost:3000
 http://localhost:8080
 ```
 
-
 ### Running build scripts
 ```
 yarn build

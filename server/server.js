@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-const  mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const Todo = require('./model/model');
 

@@ -1,3 +1,10 @@
+/**
+  * Constructs the submit view to add tasks
+  *
+  * @param {Controller} controller
+  * @param {Element} element
+  *
+  */
 export default class SubmitView {
   constructor(controller, element){
     this.controller = controller;
@@ -12,14 +19,26 @@ export default class SubmitView {
     this.value = '';
   }
 
+  /**
+   * Form submit event
+   *
+   * @param {Event} evt
+   *
+   */
   onAddTodo = (evt) => {
     evt.preventDefault();
 
-    this.controller.addTodo(this.value);
+    this.controller.saveTodo(this.value);
 
     this.input.value = '';
   }
 
+  /**
+   * Text input event
+   *
+   * @param {Event} evt
+   *
+   */
   onInput = (evt) => {
     this.value = evt.target.value;
   }

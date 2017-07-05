@@ -5,7 +5,7 @@ const TodoSchema = new Schema({
   date: { type: Date, default: Date.now },
   task: {
     type: String,
-    Required: '',
+    Required: true,
   },
   complete: Boolean,
 });

@@ -6,6 +6,16 @@ import {
   REMOVE_TODO,
 } from '../constants/app';
 
+/**
+  * Constructs the list view with all tasks
+  * and keep a reference to completed tasks
+  *
+  * @param {Controller} controller
+  * @param {Model} model
+  * @param {Element} element
+  * @param {CompletedListView} completedListView
+  *
+  */
 export default class ListView {
   constructor(controller, model, element, completedListView) {
 
@@ -20,37 +30,37 @@ export default class ListView {
   }
 
   /**
-   * Populates the todo list when app initialize
+   * Populates the todo list when app initializes
    *
-   * @param {object} data
+   * @param {Object} data
    *
    */
-    populateList = (data) => {
-      for (let i = 0; i < data.length; i += 1) {
-        const item = document.createElement('li');
+  populateList = (data) => {
+    for (let i = 0; i < data.length; i += 1) {
+      const item = document.createElement('li');
 
-        item.dataset.id = data[i]._id;
+      item.dataset.id = data[i]._id;
 
-        if (data[i].complete) {
-          this.completedListView.append(item);
-        } else {
-          this.element.appendChild(item);
-        }
-
-        item.innerHTML = `<span>${data[i].task}</span>`;
-
-        if (!data[i].complete) {
-          this.appendUI(item);
-        }
+      if (data[i].complete) {
+        this.completedListView.append(item);
+      } else {
+        this.element.appendChild(item);
       }
 
-      const tasks = this.element.querySelectorAll('li');
-      TweenMax.staggerFrom(tasks, 0.5, {
-        y: -50,
-        autoAlpha: 0,
-        ease: Expo.easeOut,
-      }, 0.15);
+      item.innerHTML = `<span>${data[i].task}</span>`;
+
+      if (!data[i].complete) {
+        this.appendUI(item);
+      }
     }
+
+    const tasks = this.element.querySelectorAll('li');
+    TweenMax.staggerFrom(tasks, 0.5, {
+      y: -50,
+      autoAlpha: 0,
+      ease: Expo.easeOut,
+    }, 0.15);
+  }
 
   /**
    * Appends UI to list element
@@ -58,23 +68,23 @@ export default class ListView {
    * @param {Element} element
    *
    */
-    appendUI = (element) => {
+  appendUI = (element) => {
 
-      const ui = document.createElement('div');
-      const complete = document.createElement('button');
-      const remove = document.createElement('button');
+    const ui = document.createElement('div');
+    const complete = document.createElement('button');
+    const remove = document.createElement('button');
 
-      complete.innerHTML = 'complete';
-      complete.addEventListener('click', this.onCompleteTodo);
+    complete.innerHTML = 'complete';
+    complete.addEventListener('click', this.onCompleteTodo);
 
-      remove.innerHTML = 'remove';
-      remove.addEventListener('click', this.onRemoveTodo);
+    remove.innerHTML = 'remove';
+    remove.addEventListener('click', this.onRemoveTodo);
 
-      element.appendChild(ui);
-      ui.appendChild(complete);
-      ui.appendChild(remove);
+    element.appendChild(ui);
+    ui.appendChild(complete);
+    ui.appendChild(remove);
 
-    }
+  }
 
   /**
    * onClick callback for complete button
@@ -82,17 +92,17 @@ export default class ListView {
    * @param {Event} evt
    *
    */
-    onCompleteTodo = (evt) => {
-      evt.preventDefault();
+  onCompleteTodo = (evt) => {
+    evt.preventDefault();
 
-      const { target } = evt;
+    const { target } = evt;
 
-      const wrapper = target.parentNode;
+    const wrapper = target.parentNode;
 
-      const { id } = wrapper.parentNode.dataset;
+    const { id } = wrapper.parentNode.dataset;
 
-      this.controller.updateTodo(id);
-    }
+    this.controller.updateTodo(id);
+  }
 
   /**
    * onClick callback for remove button
@@ -100,51 +110,64 @@ export default class ListView {
    * @param {Event} evt
    *
    */
-    onRemoveTodo = (evt) => {
-      evt.preventDefault();
+  onRemoveTodo = (evt) => {
+    evt.preventDefault();
 
-      const { target } = evt;
+    const { target } = evt;
 
-      const wrapper = target.parentNode;
+    const wrapper = target.parentNode;
 
-      const { id } = wrapper.parentNode.dataset;
+    const { id } = wrapper.parentNode.dataset;
 
-      this.controller.removeTodo(id);
+    this.controller.deleteTodo(id);
+  }
+
+  /**
+   * Removes a task from dom
+   * if flagged as complete add it to competed list
+   *
+   * @param {Object} todo
+   *
+   */
+  removeTodoFromDom = (todo) => {
+    const { _id, complete } = todo;
+
+    const target = this.element.querySelector(`li[data-id="${_id}"]`);
+
+    TweenMax.to(target, 0.5, {
+      y: -50,
+      autoAlpha: 0,
+      ease: Expo.easeIn,
+      onComplete: () => {
+        target.parentNode.removeChild(target);
+    } });
+
+    if (complete) {
+      this.completedListView.addCompletedTodoToDom(todo);
     }
+  }
 
-    removeTodoFromDom = (todo) => {
-      const { _id, complete } = todo;
+  /**
+   * Adds a task to dom
+   *
+   * @param {Object} todo
+   *
+   */
+  addTodoToDom = (todo) => {
+    const item = document.createElement('li');
 
-      const target = this.element.querySelector(`li[data-id="${_id}"]`);
+    item.dataset.id = todo._id;
 
-      TweenMax.to(target, 0.5, {
-        y: -50,
-        autoAlpha: 0,
-        ease: Expo.easeIn,
-        onComplete: () => {
-          target.parentNode.removeChild(target);
-      } });
+    this.element.insertBefore(item, this.element.firstChild)
 
-      if (complete) {
-        this.completedListView.addCompletedTodoToDom(todo);
-      }
-    }
+    item.innerHTML = `<span>${todo.task}</span>`;
 
-    addTodoToDom = (data) => {
-      const item = document.createElement('li');
+    this.appendUI(item);
 
-      item.dataset.id = data._id;
-
-      this.element.insertBefore(item, this.element.firstChild)
-
-      item.innerHTML = `<span>${data.task}</span>`;
-
-      this.appendUI(item);
-
-      TweenMax.from(item, 1, {
-        y: -50,
-        autoAlpha: 0,
-        ease: Expo.easeOut,
-      });
-    }
+    TweenMax.from(item, 1, {
+      y: -50,
+      autoAlpha: 0,
+      ease: Expo.easeOut,
+    });
+  }
 }
