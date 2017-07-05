@@ -1,0 +1,45 @@
+@charset 'UTF-8';
+
+@import '~sanitize.css/sanitize.css';
+
+@import 'utils/__utils';
+@import 'project/__project';
+@import 'specifics/__specifics';
+@import 'components/__components';
+
+
+.tasks {
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      flex: 1 1 80%;
+    }
+
+    div {
+      flex: 1 1 10%;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    button {
+      width: 30px;
+      height: 30px;
+      background-size: 100%;
+      transition: transform 250ms $ease-in-out-back;
+      &:hover {
+        transform: rotate(25deg) scale(1.2);
+      }
+    }
+
+    button:nth-of-type(1) {
+      background-image: url('~tick.svg');
+    }
+
+    button:nth-of-type(2) {
+      background-image: url('~bin.svg');
+    }
+  }
+}

@@ -1,0 +1,56 @@
+body {
+  font-family: $root-font-family;
+  font-weight: $root-font-weight;
+  font-size: $root-font-size;
+  color: $color-font-base;
+}
+
+h1 {
+  font-size: 5em;
+}
+
+h2 {
+  font-size: 3em;
+  display: inline-block;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: #26c6da;
+  }
+}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+
+p {}
+
+address {}
+
+a {
+  color: black;
+  text-decoration: none;
+
+  transition: color 200 ease-out;
+
+  &:hover { color: red; }
+}
+
+b,
+strong { font-weight: 700; }
+
+i,
+em { font-style: italic; }
+
+span {
+  font-size: 1.8em;
+}
+
+ul.completed-tasks {
+  span {
+    text-decoration: line-through;
+  }
+}

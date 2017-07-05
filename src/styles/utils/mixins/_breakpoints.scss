@@ -1,0 +1,34 @@
+$tablet-width: 480;
+$desktop-width: 800;
+$full-width: 1200;
+
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}px) {
+    @content;
+  }
+}
+
+@mixin full-width{
+  @media (min-width: #{$full-width}px) {
+    @content;
+  }
+}
+
+@mixin portrait {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin landscape {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
