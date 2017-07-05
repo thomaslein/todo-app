@@ -1,3 +1,9 @@
+/*
+* This file is part of the Todo App 2017 project.
+*
+* @author Thomas Lein <thomaslein@gmail.com>
+*/
+
 /**
   * Constructs the completed list view with all completed tasks
   *

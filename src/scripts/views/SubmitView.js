@@ -1,3 +1,9 @@
+/*
+* This file is part of the Todo App 2017 project.
+*
+* @author Thomas Lein <thomaslein@gmail.com>
+*/
+
 /**
   * Constructs the submit view to add tasks
   *

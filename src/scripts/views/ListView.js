@@ -1,3 +1,9 @@
+/*
+* This file is part of the Todo App 2017 project.
+*
+* @author Thomas Lein <thomaslein@gmail.com>
+*/
+
 import TweenMax from '../lib/gsap/TweenMax';
 
 import {
