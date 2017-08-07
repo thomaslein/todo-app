@@ -42,6 +42,8 @@ export default class ListView {
    *
    */
   populateList = (data) => {
+    // TODO: Make a hash table with all elements for reference
+
     for (let i = 0; i < data.length; i += 1) {
       const item = document.createElement('li');
 

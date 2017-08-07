@@ -29,6 +29,7 @@
       height: 30px;
       background-size: 100%;
       transition: transform 250ms $ease-in-out-back;
+
       &:hover {
         transform: rotate(25deg) scale(1.2);
       }

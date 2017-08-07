@@ -1,5 +1,5 @@
 /*
- * This file is part of the Eggs todo 2017 project.
+ * This file is part of the Todo App 2017 project.
  *
  * @author Thomas Lein <thomaslein@gmail.com>
  */
